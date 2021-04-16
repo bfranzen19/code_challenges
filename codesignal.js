@@ -24,31 +24,50 @@ function firstDuplicate(a) {
 
 /* =========================== */
 /*
-Given a string s consisting of small English letters, find and return the first instance of a non-repeating character in it. If there is no such character, return '_'.
+Given a year, return the century it is in. The first century spans from the year 1 up to and including the year 100, the second - from the year 101 up to and including the year 200, etc.
+*/
+function centuryFromYear(year) {
+    if(year%100 !== 0) {    // check if there is a remainder
+        let century = Math.floor(year/100)+1;   // get the quotient and add 1 because it's over the threashold
+        return century;
+    }
+    else {
+        let century = (year/100);   // even number, divide and call it good
+        return century;
+    }
+}
+
+// ======================================= //
+/*
+Given the string, check if it is a palindrome.
 */
 
+function checkPalindrome(inputString) {
+    // same backwards as it is forwards
+    // return boolean --> true if palindrome, false if not
+    // non-empty string, only lowercase, between 1 and 10^5 length
 
+    let reverseStr = inputString.split('').reverse().join(''); // string --> split to array, reverse, join, save in 2nd variable
+    return inputString === reverseStr;  // compare strings
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<<<<<<< HEAD
-// template
-/* =========================== */
+// ======================================= //
 /*
 
 */
-=======
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -58,8 +77,3 @@ Given a string s consisting of small English letters, find and return the first 
 /*
 
 */
-
-
-
-// ======================================= //
->>>>>>> 5d2b832b206eda0c74a5b6d1dbee00e0fcbe3162
