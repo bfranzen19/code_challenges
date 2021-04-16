@@ -42,8 +42,24 @@ Given a string s consisting of small English letters, find and return the first 
 
 
 
+<<<<<<< HEAD
 // template
 /* =========================== */
 /*
 
 */
+=======
+
+
+
+
+/* template */
+// ======================================= //
+/*
+
+*/
+
+
+
+// ======================================= //
+>>>>>>> 5d2b832b206eda0c74a5b6d1dbee00e0fcbe3162
