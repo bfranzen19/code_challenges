@@ -72,8 +72,64 @@ function adjacentElementsProduct(inputArray) {
 
 // ======================================= //
 /*
+Below we will define an n-interesting polygon. Your task is to find the area of a polygon for a given n.
+*/
+
+function shapeArea(n) {
+    // input: integer n, between 1 and 10^4
+    // output: integer, the area of the polygon
+    // n1 == 1, n2 == 5, n3 == 13, n4 == 25
+    //  diff == 4   diff == 8  diff == 12
+    //            4          4
+
+    // pattern: each n === 4
+    return n * n + (n - 1) * (n - 1);
+    //              2 - 1     2 - 1
+    //     2 * 2
+    //                1    *    1
+    //       4   +    1
+    // return 5
+}
+
+// ======================================= //
+/*
+Ratiorg got statues of different sizes as a present from CodeMaster for his birthday, each statue having an non-negative integer size. Since he likes to make things perfect, he wants to arrange them from smallest to largest so that each statue will be bigger than the previous one exactly by 1. He may need some additional statues to be able to accomplish that. Help him figure out the minimum number of additional statues needed.
+*/
+
+// sorting arrays
+// statues.sort(function(a,b){
+//   return a - b;
+// });
+
+// comparing arrays
+// const equals = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+//
+// const a = [1, 2, 3];
+// const b = [1, 2, 3];
+//
+// equals(a, b); // true
+
+function makeArrayConsecutive2(statues) {
+    // input: array, integers (statues)
+    // integer --> minimal numebr of statues that need to be added to the existing statues so that it contains every integer
+
+   return Math.max(...statues)-Math.min(...statues)+1-statues.length // return the length of the outstanding statues array
+}
+
+// ======================================= //
+/*
 
 */
+
+
+
+
+
+
+
+
+
+
 
 
 
