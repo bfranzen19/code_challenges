@@ -72,12 +72,29 @@ function adjacentElementsProduct(inputArray) {
 
 // ======================================= //
 /*
-
+Below we will define an n-interesting polygon. Your task is to find the area of a polygon for a given n.
 */
 
+function shapeArea(n) {
+    // input: integer n, between 1 and 10^4
+    // output: integer, the area of the polygon
+    // n1 == 1, n2 == 5, n3 == 13, n4 == 25
+    //  diff == 4   diff == 8  diff == 12
+    //            4          4
 
+    // pattern: each n === 4
+    return n * n + (n - 1) * (n - 1);
+    //              2 - 1     2 - 1
+    //     2 * 2
+    //                1    *    1
+    //       4   +    1
+    // return 5
+}
 
+// ======================================= //
+/*
 
+*/
 
 
 
