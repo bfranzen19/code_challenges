@@ -37,6 +37,28 @@ function centuryFromYear(year) {
     }
 }
 
+// ======================================= //
+/*
+Given the string, check if it is a palindrome.
+*/
+
+function checkPalindrome(inputString) {
+    // same backwards as it is forwards
+    // return boolean --> true if palindrome, false if not
+    // non-empty string, only lowercase, between 1 and 10^5 length
+
+    let reverseStr = inputString.split('').reverse().join(''); // string --> split to array, reverse, join, save in 2nd variable
+    return inputString === reverseStr;  // compare strings
+}
+
+// ======================================= //
+/*
+
+*/
+
+
+
+
 
 
 
