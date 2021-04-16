@@ -53,8 +53,32 @@ function checkPalindrome(inputString) {
 
 // ======================================= //
 /*
+Given an array of integers, find the pair of adjacent elements that has the largest product and return that product.
+*/
+
+function adjacentElementsProduct(inputArray) {
+    // execution limit == 4s
+    // array of integers containing at least 2 elements
+    // do no change the order of the array
+    // pair of adjacent elements that has largest product
+    // return product
+
+    let product = -Infinity;
+    for (let i = 1; i < inputArray.length; i++) {
+        product = Math.max(inputArray[i] * inputArray[i - 1], product);
+    }
+    return product;
+}
+
+// ======================================= //
+/*
 
 */
+
+
+
+
+
 
 
 
