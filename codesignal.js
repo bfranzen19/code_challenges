@@ -118,14 +118,166 @@ function makeArrayConsecutive2(statues) {
 
 // ======================================= //
 /*
-
+add bold tag in string
+Given a string s and a list of strings dict, you need to add a closed pair of bold tag <b> and </b> to wrap the substrings in s that exist in dict. If two such substrings overlap, you need to wrap them together by only one pair of closed bold tag. Also, if two substrings wrapped by bold tags are consecutive, you need to combine them.
 */
 
 
+function addBoldTag(s, dict) {
+    // loop through scroll
+    // find longest bold word end index for each index
+    // connect them if needed
+    // return the result string
+
+    // return -1 if no bold found
+    // return the last bold index if found
+    const getBoldEnd = (i) => {
+
+    }
+
+    let result = '';
+
+    for(let i=0 ; i<s.length ; i++) {
+        let boldEnd = getBoldEnd(i);
+
+        while(boldEnd !== -1) {
+            let next =
+        }
 
 
+    }
+
+}
+
+// ======================================= //
+/*
+get an amount and a list of recipients, return the name and the most even payment amount.
+
+1. cannot overpay anyone
+2. split as evenly as possible
+*/
+
+function payEvenly(amountToPay, recipients) {
+  // return an object containing names and amounts owed
+  let recObj = {};
+
+  // get the total totalAmountOwed from recipients
+  let totalAmountOwed = 0;
+  for(let recipient in recipients) {
+    totalAmountOwed += recipients[recipient];
+  }
+
+  // if totalAmountOwed <= amountToPay, pay everyone
+  if(totalAmountOwed <= amountToPay) { return recipients; }
+
+  // if totalAmountOwed > amountToPay
+  else {
+    // get equal split amount
+    let equalSplit = Math.floor(amountToPay / Object.keys(recipients).length);
+
+    // need to find highest and lowest payment amounts
+    let arr = Object.values(recipients);  // could be problematic for a large number of recipients
+    let highest = Math.max(...arr);
+    let lowest = Math.min(...arr);
+
+    // equalSplit is less than or equal to totalAmountOwed
+    if(equalSplit > totalAmountOwed) {
+      // if payments aren't using equalSplit, use this variable
+      let payment = 0;
+
+      // check that equalSplit does not exceed the lowest amount available. return empty obj.
+      if(lowest <= amountToPay) {
+        return {};
+      }
+
+      // make sure equalSplit isn't overpaying the lowest payment
+      if(lowest <= equalSplit) {
+        if(highest <= equalSplit) { payment = highest; }
+        else if(lowest >= equalSplit) { payment = lowest; }
+        else { payment = equalSplit; }
+      }
+      else {
+        for(let recipient in recipients) {
+          recObj[recipient] = lowest;
+        }
+      }
+
+      if(payment > 0) {
+        for(let recipient in recipients) {
+          recObj[recipient] = equalSplit;
+        }
+      }
+    }
+    // equalSplit < totalAmountOwed, return equalSplit
+    else {
+      for(let recipient in recipients) {
+        recObj[recipient] = equalSplit;
+      }
+    }
+  }
+
+  // check that the overall amount does not exceed the available funds
+  let totalAmountPaid = 0;
+  for(let prop in recObj) {
+    totalAmountOwed += recObj[prop];
+  }
+
+  if(totalAmountPaid <= amountToPay) {
+    return recObj;
+  }
+  else {
+    return 'error: payment amount exceeds available funds';
+  }
+}
 
 
+// examples
+let amt_even = 100;
+let rec_even = {
+  "bob": 25,
+  "mary": 25,
+  "joe": 25,
+  "larry": 25
+}
+let even = payEvenly(amt_even, rec_even);
+console.log('even: ' + JSON.stringify(even)); // expect 25 each
+
+let amt_high = 100;
+let rec_high = {
+  "bob": 125,
+  "mary": 25,
+  "joe": 75,
+  "larry": 35
+}
+let high = payEvenly(amt_high, rec_high);
+console.log('high: ' + JSON.stringify(high)); // expect 25 each
+
+let amt_highest = 100;
+let rec_highest = {
+  "bob": 225,
+  "mary": 125,
+  "joe": 175,
+  "larry": 335
+}
+let highest = payEvenly(amt_highest, rec_highest);
+console.log('highest: ' + JSON.stringify(highest)); // expect 25 (even split) - all values exceed split
+
+let most_recps = 100;
+let rec_most = {
+  "bob": 225,
+  "mary": 125,
+  "joe": 175,
+  "larry": 335,
+  "skip": 17,
+  "strous": 22
+}
+let most = payEvenly(most_recps, rec_most);
+console.log('most: ' + JSON.stringify(most)); // expect 17
+
+// ======================================= //
+/*
+
+*/
 
 
 
