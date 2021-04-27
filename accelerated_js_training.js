@@ -42,6 +42,14 @@ SECTION 2 -- language basics
         - error message from a mathematical calculation
 
 + variables - objects
+    - typeof object == "object"
+    - objects have fields and methods
+    - fields / properties: variables inside objects
+    - methods: functions inside objects
+        let obj = {
+            name: 'bt'
+        }
+    - access properties via name.property (example: obj.name returns 'bt')
 
 + strict mode
 
