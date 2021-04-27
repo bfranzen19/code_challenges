@@ -79,9 +79,29 @@ SECTION 2 -- language basics
     - at least have the declaration before the initialization
 
 + functions - creating and calling
-    - 
+    - enclosed code that you can execute whenever you want
+    - can have function definitions after calls because of hoisting
+
+        function calc() { // declaring a function
+            console.log('inside calc()');
+        }
+        calc(); // calling the fuction
+
+        let calc = function() {
+            console.log('inside calc()');
+        };  // this is setting a variable
+        calc(); // called the same way
+
+        // typeof calc == "function"
+
+        let anotherFn = calc;
+        anotherFn(); // still calls calc() via the variable
+
+        let anotherFn = calc();
+        anotherFn(); // executes and then shows an error that anotherFn != function
 
 + functions - arguments & returning data
+    - 
 
 + control structures - if statement
 
