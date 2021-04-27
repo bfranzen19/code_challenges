@@ -1,17 +1,22 @@
 SECTION 1 -- course content
 + into
-
 + execute js
-
 + js versions
-
 + course format
 
 
 SECTION 2 -- language basics
 +  intro
-
 + use js - inline HTML
+    - execute code inside html document by using script tags
+        <script>console.log('hi')</script>  // will print hi to the console
+    - attributes of the script tag:
+        - type (text/javascript)    // this is default
+    - script can be in head or bottom of body
+        - bottom of the bottom makes sure the document is loaded before script runs
+    - noscript tags (<noscript>message for js turned off</noscript>)
+
++ use js - HTML import
     - import via script tag in html, path == script.js
         - executed immediately (as soon as js finds the file)
         - gets rid of code in the file
@@ -23,9 +28,8 @@ SECTION 2 -- language basics
         - can add multiple scripts
         - place imports in the correct order for dependencies
 
-+ use js - HTML import
-
 + variables - basics
+    - store data 
 
 + variables - null, undefined, and NaN
 
