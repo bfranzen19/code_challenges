@@ -115,8 +115,15 @@ SECTION 2 -- language basics
     else { condition_is_false; }
 
 + control structures - if statement advanced
+    - 1 == true, 0 == false (casting to boolean)
+    - 2 gets interpreted to truthy as well
+    - anything not equal to 0 will be interpreted as truthy (including negatives)
+    - only 0 and 1 can be casted, everything else is truthy
+    - string is also true
+    - null is treated as falsy
 
 + control structures - switch
+    - 
 
 + control structures - switch & break
 
