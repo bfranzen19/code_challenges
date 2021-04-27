@@ -64,7 +64,12 @@ SECTION 2 -- language basics
         - if you're using a 3rd party library, you may have issues with strict mode.
 
 + dynamic typing
-    -
+    - var1 and Var1 are 2 different variables because js is case sensitive
+    - can reset variable values without worry about original variable data type
+        let var1 = 5;
+        console.log(var1);    // 5
+        var1 = "ten";
+        console.log(var1);    // ten
 
 + hoisting
 
