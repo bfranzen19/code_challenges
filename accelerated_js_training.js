@@ -29,9 +29,17 @@ SECTION 2 -- language basics
         - place imports in the correct order for dependencies
 
 + variables - basics
-    - store data 
+    - store data
 
 + variables - null, undefined, and NaN
+    - == value equality, === type equality
+    - set an unset variable to null, not undefined
+    - typeof null == "object"
+    - typeof undefined == "undefined"
+    - NaN:
+        - result of a mathematical operation error
+        - typeof == "number"
+        - error message from a mathematical calculation
 
 + variables - objects
 
