@@ -101,9 +101,16 @@ SECTION 2 -- language basics
         anotherFn(); // executes and then shows an error that anotherFn != function
 
 + functions - arguments & returning data
-    - 
+    - inputs into a function == arguments
+
+        function calc(number1, number2) {
+            return number1 + number2;
+        }
+        let calculator = calc;
+        console.log(calculator(15,2));  // prints 17
 
 + control structures - if statement
+    - 
 
 + control structures - if statement advanced
 
