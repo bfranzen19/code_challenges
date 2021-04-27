@@ -123,7 +123,18 @@ SECTION 2 -- language basics
     - null is treated as falsy
 
 + control structures - switch
-    - 
+    let condition = 8;
+    switch(condition) {
+        case 1: // condition === case
+            console.log('is 1');
+            break;
+        case 8:
+            console.log('is 8');
+            break;
+        default: // condition never equals case
+            console.log('is default');
+            break;
+    }
 
 + control structures - switch & break
 
