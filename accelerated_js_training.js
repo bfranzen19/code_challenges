@@ -12,6 +12,16 @@ SECTION 2 -- language basics
 +  intro
 
 + use js - inline HTML
+    - import via script tag in html, path == script.js
+        - executed immediately (as soon as js finds the file)
+        - gets rid of code in the file
+        - can be in the head or body, body ensures it's loaded last
+        - must have closing script tag
+        - if you put something inbetween the script tags, will not show
+            ex: <script src="script.js"></script>
+
+        - can add multiple scripts
+        - place imports in the correct order for dependencies
 
 + use js - HTML import
 
@@ -83,7 +93,7 @@ SECTION 3 -- types & scope
 
 + global vs local scope
 
-+ global vs local scope - exercise 
++ global vs local scope - exercise
 
 + more resources
 
