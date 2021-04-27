@@ -72,8 +72,14 @@ SECTION 2 -- language basics
         console.log(var1);    // ten
 
 + hoisting
+    - essentially runs over the code twice:
+        - first time: fetches all declarations
+        - second time: running all declarations
+    - all variables are hoisted to the top of the code so it does not matter if you declare a variable after using it.
+    - at least have the declaration before the initialization
 
 + functions - creating and calling
+    - 
 
 + functions - arguments & returning data
 
