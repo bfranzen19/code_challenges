@@ -52,8 +52,19 @@ SECTION 2 -- language basics
     - access properties via name.property (example: obj.name returns 'bt')
 
 + strict mode
+    - not in strict mode:
+        - don't have to use let/var/const to set a variable
+        - don't have to use semicolons at line ends
+        - decreases performance overall
+    - strict mode:
+        - certain syntacical things
+        - in script.js file, set strict mode:
+            "use strict";
+        - now must use let/var/const to set a variable and use semicolons at line ends now.
+        - if you're using a 3rd party library, you may have issues with strict mode.
 
 + dynamic typing
+    -
 
 + hoisting
 
