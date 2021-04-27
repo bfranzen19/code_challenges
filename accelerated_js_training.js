@@ -110,7 +110,9 @@ SECTION 2 -- language basics
         console.log(calculator(15,2));  // prints 17
 
 + control structures - if statement
-    - 
+    if(condition) { condition_is_true; }
+    else if(condition2) { condition_2_is_true; }
+    else { condition_is_false; }
 
 + control structures - if statement advanced
 
