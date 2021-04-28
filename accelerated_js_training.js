@@ -137,18 +137,115 @@ SECTION 2 -- language basics
     }
 
 + control structures - switch & break
+    - without break in a switch statement, it doesn't stop. it jumps right over the other cases and executes everything
+    - break tells js that we break out of that condition
 
 + control structures - for loop
-
 + control structures - nested loops
-
 + control structures - controlling loops with break & continue
+    // break
+    for(let i=0 ; i<5 ; i++) {
+        if(i == 1) {
+            break;  // i == 1, break statement and exits the loop
+        }
+        console.log(i); // 0
+    }
+
+    // continue
+    for(let i=0 ; i<5 ; i++) {
+        if(i == 1) {
+            continue; // i == 1, continue with the next iteration
+        }
+        console.log(i); // 0, 2, 3, 4
+    }
+
+    // nested continue
+    for(let i=0 ; i<5 ; i++) {
+        for(let j=0 ; j<2 ; j++) {
+            if(i == 1) {
+                continue; // i == 1, continue with the next in the INNER loop
+            }
+            console.log('inner loop, j = ' + j);
+        }
+        console.log(i);
+    }
+    // prints:
+    /*
+    inside inner loop, j = 0
+    inside inner loop, j = 1
+    0
+    1
+    inside inner loop, j = 0
+    inside inner loop, j = 1
+    2
+    inside inner loop, j = 0
+    inside inner loop, j = 1
+    3
+    inside inner loop, j = 0
+    inside inner loop, j = 1
+    4
+    */
+
+    // nested break
+    for(let i=0 ; i<5 ; i++) {
+        for(let j=0 ; j<2 ; j++) {
+            if(i == 1) {
+                break; // i == 1, break out of the INNER loop
+            }
+            console.log('inner loop, j = ' + j);
+        }
+        console.log(i);
+    }
+    // prints:
+    /*
+    inside inner loop, j = 0
+    inside inner loop, j = 1
+    0
+    1
+    inside inner loop, j = 0
+    inside inner loop, j = 1
+    2
+    inside inner loop, j = 0
+    inside inner loop, j = 1
+    3
+    inside inner loop, j = 0
+    inside inner loop, j = 1
+    4
+    */
+    - continue and break only refer to the loops that they are inside, not the outer loops that may be surrounding the loops they are in
 
 + control structures - for loop variations
+    for(let i=5 ; i > 1 ; i--) // counts backwards
 
 + control structures - looping through arrays
+    let arr = [1,2,3];
+    for(let i=0 ; i<arr.length ; i++) {
+        console.log(arr[i]);    // loop through each element
+    }
 
 + control structures - while loop
+    // generic while loop
+    let number = 5;
+    while(number < 7) {   // while the condition is true, execute
+        console.log(number);    // 5, 6
+        number++;
+    }
+
+    // while loop with if statement
+    let condition = true;
+    let i = 2;
+    while(number < 7) {
+        if(i == 3) { condition = false; }
+        console.log(i);    // 2, 3
+        i++;
+    }
+
+    // want to run the code once, dynamically setting the condition
+    let condition = false;
+    do {
+        console.log('executed');
+    }
+    while(condition);
 
 + operators - addition
 
