@@ -248,24 +248,141 @@ SECTION 2 -- language basics
     while(condition);
 
 + operators - addition
+    - can add strings like numbers
+        let a = 'join ';
+        let b = 'us';
+        console.log(a + b); // "join us"
+
+    - can add numbers and strings and it will concatenate
+        let a = 'join ';
+        let b = 3;  // gets cast into a string
+        console.log(a + b); // "join 3"
+
+    - and booleans
+        let a = true;   // gets cast into a string
+        let b = ' join';
+        console.log(a + b); // "true join"
+
+    - and arrays
+        let a = [1,2];  // gets cast into a string
+        let b = ' join';
+        console.log(a + b); // "1,2 join"
+
+    - can add booleans and numbers since true and false are 1 and 0
+        let a = 12;
+        let b = true; // gets cast to a number
+        console.log(a + b); // 13
+
+        let a = true;   // gets cast to a number
+        let b = true;   // gets cast to a number
+        console.log(a + b); // 2
+
+    - null and number
+        let a = 12;
+        let b = null;   // gets cast to a number, which is a falsy value of 0
+        console.log(a + b); // 12
+
+    - undefined and number
+        let a = 12;
+        let b = undefined;   // cannot be cast so it shows an error. same as if it's NaN.
+        console.log(a + b); // NaN
+
+    - ++ and +=
 
 + operators - subtraction
+    - subtraction does not work the same, it will just turn NaN with subtracting strings
+    - if the non-numeric value can be cast to a number, it will be. otherwise, it will be NaN.
+    - -= and --
 
 + operators - multiplication & floating point problems
+    - *= and
+    - ** throws an error
+    - floating point numbers are problematic
+        let a = 1.3;
+        let b = 2.2;
+        console.log(a * b); // 2.86000000000000003
+
+    - makes a much more complex number out of simple multiplication
+        let a = 1.3;
+        let b = 2.2;
+        console.log(a * b); // 2.86000000000000003
+
+        if(a * b == 2.86) { console.log('true'); }
+        else { console.log('false'); } // false
+
+    - how to get around this
+        let a = 1.3;
+        let b = 2.2;
+        console.log(a * b); // 2.86000000000000003
+
+        if((a * b).toFixed(2) == 2.86) { console.log('true'); } // true
+        else { console.log('false'); }
+
+    - can cast a string to a number but cannot cast types that are not able to cast
+    - Infinity: representation of the infinity value
 
 + operators - division & modulus
+    - /=
+    - same casting rules apply
+    - floating point number issue still applies
+    - % modulus gives the remainder
+    - divide by 0 will give us Infinity
+    - divide by Infinity will give us 0
 
 + operators - comparing values
+    - comparison:
+        - == checks value
+            1 == 1      // true
+            1 == '1'    // true
+
+        - === checks value and type
+            1 === 1     // true
+            1 === '1'   // false
+        - != not equal values and !== value and type (same rules apply)
+        - >= <=
+            - only a single
 
 + operators - important rules
+    - NaN == NaN // false -- built in rule, NaN is not equal to NaN
+    - NaN != NaN // true
+    - 0 == null // false -- null cannot be compared
+    - null == undefined // true -- null can only be compared to undefined
+    - 0 == undefined // false -- undefined compared to anything is always false EXCEPT when compared to null
 
 + operators - boolean
+    - && AND
+        - both sides must be true
+            if(1==1 && 2==2)    // true
+            if((1==1) && (2==3)) // false, 2 != 3
+
+    - || OR
+        - just one has to be true
+            if((1==1) || (2==2))    // true
+            if(1==2 || 2==3)        // false, none are true
+            if(1==1 || 2==3 && 4==5)// true, first statement is true, neither of the 2nd must be true
+            if(1==1 && 2==3 || 4==4)    // true
+            if((1==1 && 2==3) || 4==4)// true
+            if((1==1 && 2==3) || 4==5)// false
+
+    - !== equality
+    - !variable inverts the meaning (the opposite)
 
 + operators - ternary operator
+    - condition ? 'if_true' : 'if_false';
+        let a = 5;
+        let b = 5;
+        console.log(a==b ? 'equal' : 'not equal');  //equal
+
+        let a = 5;
+        let b = 6;
+        console.log(a==b ? 'equal' : 'not equal');  //not equal
 
 + operators - precendence
+    - which operator takes precedence over the other
+    - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence
 
 + wrap up
+    - 
 
 + module resources
 
