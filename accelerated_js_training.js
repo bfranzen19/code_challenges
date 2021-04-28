@@ -382,44 +382,235 @@ SECTION 2 -- language basics
     - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence
 
 + wrap up
-    - 
-
 + module resources
 
 
 SECTION 3 -- types & scope
 + intro
-
 + primitive vs reference types
+    - primitive types:
+        - stored in memory
+        - when this variable is used, i access this variable in memory. variable directly holds value.
+            let a = 5; // --> in memory, 5 is stored
+            let b = a; // --> in memory, copied from variable a and stored in memory
+            // this value is copied and stored, not referenced
+    - reference types:
+        - objects
+        - variable holds pointer, not value
+        let a = { a: 5 }; // object is created in memory, but the variable does not hold the value, it holds a pointer, pointing towards that value. the object is created in memory and the variable only has a pointer to this value.
+        let b = a; // not copying the value or object in the memory, just the pointer.
+
+        - this is because of the probability that objects can become very compled. allows us to not pollute memory and create a single instance with multiple pointers to that instance.
 
 + primitive vs reference types - execise
+    - arrays are objects so they are also reference types
 
 + global vs local scope
+    - scope: the registry on which your variables, etc. are registered.
+    - global scope: window object
+        - top most level
+    - local scope: nested inside global scope
+        - created when we create a function
+        - inside the function, there is its own scope
+            - variables defined within functions are scoped to that function
+            - cannot access function scoped variables outside of the function
+    - can go from global scope to local scope but cannot go the opposite
 
 + global vs local scope - exercise
-
+    - variables declared without let/const/var are default global variables (not in strict)
 + more resources
+
 
 SECTION 4 -- arrays
 + intro
+    - collection of comma separated items
+    - index starts at 0
 
 + basics & managing elements
+    - access elements by array_name[index_value] --> arr[0] // access 1st element in arr array
+    - can add values via []
+        let array = [1,2,3];
+        array[4] = 100;
+        console.log(array); // 1,2,3,100
+
+        let array = [1,2,3];
+        array[5] = 100;
+        console.log(array); // 1,2,3,undefined, undefined, 100
+    - accessing an undefined element will just return undefined, not an error
 
 + the forEach() method
+    let array = [1,2,3];
+    array.forEach(function(element) {
+        console.log(element); // 1,2,3
+    });
 
 + working with elements: push, pop, unshift, and shift
+    - push(): array.push(value_to_add_to_end);
+        - adds an element to the end of the array
+        - always appended at the END of the array
+            let array = [1,2,3,,];  // 2 commas will create an undefined element
+            array.push(4);
+            console.log(array); // [1,2,3,undefined,4]
+
+    - pop(): array.pop();
+        - removes the last element and RETURNS the removed element.
+            let array = [1,2,3,4];
+            array.pop();
+            console.log(array); // [1,2,3]
+            console.log(array.pop()); // 4
+
+    - unshift(): array.unshift(value_to_add_to_start);
+        -
+            let array = [1,2,3,4];
+            array.unshift("new");
+            console.log(array); // ["new", 1,2,3,4]
+
+    - shift(): array.shift();
+        - removes the first element and RETURNS the removed element
+            let array = [1,2,3,4];
+            array.shift();
+            console.log(array); // [2,3,4]
+            console.log(array.shift()); // 1
 
 + working with parts of an array: indexOf(), splice(), and slice()
+    - indexOf(): array.indexOf(value_to_find);
+        - returns the index of the value_to_find
+            let array = [1,2,3,4];
+            array.unshift("new"); // inserts new at position 0
+            array[array.indexOf("new")] = "old"; // replacing the element at the index of "new" with "old"
+            console.log(array); // ["old", 1,2,3,4]
+
+    - splice(): array.splice(start_element_index, number_of_elements);
+        - REMOVES elements from the original array and returns them in a new array
+
+            let array = [1,2,3,4];
+            array.unshift("new");
+            array[array.indexOf("new")] = "old";
+
+            let newArr = array.splice(3);
+            console.log(newArr); // [3,4]
+
+            let array = [1,2,3,4];
+            array.unshift("new");
+            array[array.indexOf("new")] = "old";
+
+            let newArr = array.splice(2,2);
+            console.log(newArr); // [2,3]
+            console.log(array); // ["old", 1, 4] --> [2,3] are removed
+
+    - slice(): array.slice(start_element_index, end_element_index);
+        - returns elements in the range of start_element_index to end_element_index in a new array, without impacting the original oray
+
+            let array = [1,2,3,4];
+            array.unshift("new");
+            array[array.indexOf("new")] = "old";
+
+            let newArr = array.slice(2,4);
+            console.log(newArr); // [2,3]
+            console.log(array); // ["old", 1, 2, 3, 4] --> [2,3] are still there
 
 + filtering, mapping, and reversing array elements
+    - filter():
+        es5: array.filter(function(item) { function_code_block });
+        es6: array.filter((item) => { function_code_block });
+
+        - creates a new array
+        - executed on each value
+        - can evaluate each element
+        - does not impact original array
+
+        let array = [1,2,3,4];
+        array.unshift("new");
+        array[array.indexOf("new")] = "old"; // ["old", 1, 2, 3, 4]
+
+        console.log(
+            array.filter(item => {
+                return item > 2;
+            })
+        );  // [3,4] --> only items greater than 2
+
+    - map():
+        es5: array.map(function(item) { function_code_block });
+        es6: array.map((item) => { function_code_block });
+
+        - creates a new array
+        - can perform some operation on each element
+        - map allows to return something * 2, for instance
+        - does not impact original array
+
+        let array = [1,2,3,4];
+        array.unshift("new");
+        array[array.indexOf("new")] = "old";  // ["old", 1, 2, 3, 4]
+
+        console.log(
+            array.map(item => {
+                return item * 2;
+            })
+        );  // [NaN, 2, 4, 6, 8] --> each element * 2
+
+    - reverse(): array.reverse();
+        - not returning a new array, this is the original array that is reversed
+
+        let array = [1,2,3,4];
+        array.unshift("new");
+        array[array.indexOf("new")] = "old";  // ["old", 1, 2, 3, 4]
+
+        console.log(array.reverse());  // [4, 3, 2, 1, "old"]
 
 + the difference between concat() and join()
+    - concat(): array.concat(array_to_append);
+        - combines 2 arrays in one single array
+        - does not impact either of the original arrays
+        - returns a new array of array + newArr at the end: ["old", 1, 2, 3, 4, 'join ', 'me']
+
+        let array = [1,2,3,4];
+        array.unshift("new");
+        array[array.indexOf("new")] = "old";  // ["old", 1, 2, 3, 4]
+
+        let newArr = ['join ', 'me'];
+        console.log(array.concat(newArr)); // ["old", 1, 2, 3, 4, 'join ', 'me']
+        console.log(array); // ["old", 1, 2, 3, 4]
+
+    - join(): array.join(item_to_join_on);
+        - returns a new string
+        - joins an array into a string
+        - typically join on a comma or empty string
+
+            let array = [1,2,3,4];
+            array.unshift("new");
+            array[array.indexOf("new")] = "old";  // ["old", 1, 2, 3, 4]
+
+            let newArr = ['join ', 'me'];
+            console.log(array.join(newArr)); // "oldjoin,me1join,me2join,me3join,me4"
+            console.log(array); // ["old", 1, 2, 3, 4]
 
 + reducing arrays
+    - reduce():
+        es5: array.reduce(function(total,value) { function_code_block });
+        es6: array.reduce((total,value) => { function_code_block });
+
+        - takes a function as an argument
+        - function takes 2 arguments -- value and total
+        - reduces an array to a single value
+        - this example, we add all values up
+        - does not impact original array
+        - shrinks an array into a single value
+
+            let array = [1,2,3,4];
+            console.log(
+                array.reduce(function(total,value) {
+                    console.log('total: ' + total + 'value: ' + value);
+                    // total: 1, value: 2 -- 1 + 2 = 3
+                    // total: 3, value: 3 -- 3 + 3 = 6
+                    // total: 6, value: 4 -- 6 + 4 = 10
+                    return total + value;
+                })
+            );
+            console.log(array); // [1, 2, 3, 4]
 
 + wrap up
-
 + more resources
+
 
 SECTION 5 -- objects
 + intro
