@@ -613,39 +613,518 @@ SECTION 4 -- arrays
 
 
 SECTION 5 -- objects
-+ intro
-
 + object basics & literal notation
+    - key, value pairs
+    - can use one object in multiple variables and if you change one, the others will update as well.
+
+    - creating ojects with literal notation
+
+        let person = {
+            name: 'bt', // literal notation
+            age: 34,
+        };
+        console.log(person);
+        /*
+        [object Object] {
+            age: 34,
+            name: 'bt'
+        }
+        */
+        console.log(person.name);   // 'bt' --> always use when you kmow what property you're accessing
+        console.log(person['name']);   // 'bt' --> not how you should do it by default. useful if you need to dynamically access these properties
+
+        let field = 'name'; // dynamically created
+        console.log(person[field]); // 'bt'
+
+        - can have objects as properties
+            let person = {
+                name: 'bt', // literal notation
+                age: 34,
+                details: {
+                    hobbies: ['sports', 'cooking'],
+                    location: ['colorado']
+                }
+            };
+            // access these nested values via dot notation
+            console.log(person.details.hobbies);    // ['sports', 'cooking']
+
+
+        - can have functions / methods
+            let person = {
+                name: 'bt', // literal notation
+                age: 34,
+                details: {
+                    hobbies: ['sports', 'cooking'],
+                    location: ['colorado']
+                },
+                greet: function() {
+                    console.log('hello ');
+                }
+            };
+            person.greet();    // 'hello '
+
+        - console.log(typeof person.name); // "string"
+
+    - may use strings in your variable names which allows you to use dashes and stuff. can be both strings or not.
+
+    let person = {
+        "first-name": 'bt', // literal notation
+        "age": 34,
+    };
+    console.log(person["first-name"]); // must access string keys like this
 
 + properties & "this"
+    let person = {
+        name: 'bt', // literal notation
+        age: 34,
+        details: {
+            hobbies: ['sports', 'cooking'],
+            location: ['colorado']
+        },
+        greet: function() {
+            console.log('hello ');
+        }
+    };
+    person.name = 'anna';   // changes name property
+    console.log(person);
+    /*
+    [object Object] {
+        age: 34,
+        details: [object Object] {
+            hobbies: ['sports', 'cooking'],
+            location: ['colorado']
+        },
+        greet: function() {
+            console.log('hello ');
+        },
+        name: 'anna'
+    }
+    */
+
+    - objects have their own scope
+    - this refers to the object and allows us to reference properties in this scope
+        let person = {
+            name: 'bt', // literal notation
+            age: 34,
+            details: {
+                hobbies: ['sports', 'cooking'],
+                location: ['colorado']
+            },
+            greet: function() {
+                console.log('hello, i am ' + this.name); // access object name using this keyword
+            }
+        };
+        person.greet();
 
 + alternative ways of creating objects - using the object constructor
+    - literal is preferable
+        let person = {
+            name: 'bt',
+            age: 34,
+        };
+
+        let otherPerson = new Object(); // instantiate new object
+        otherPerson.name = 'homer';
+        otherPerson.age = 11;
+        console.log(otherPerson);
+        /*
+        [object Object] {
+            age: 11,
+            name: "homer"
+        }
+        */
 
 + objects are reference types
+    let person = {
+        name: 'bt',
+        age: 34,
+    };
+
+    let otherPerson = new Object();
+    otherPerson.name = 'bt';
+    otherPerson.age = 24;
+    console.log(otherPerson == person); // FALSE - same type, fields, and values but different reference
+
+    let person = {
+        name: 'bt',
+        age: 34,
+    };
+
+    let person1 = {
+        name: 'bt',
+        age: 34,
+    };
+    console.log(person1 == person); // FALSE still for the same thing since it's a new object
+    ** this is actually comparing the pointers, not the objects in memory **
 
 + object.create()
+    - prototypes of objects == js inheritance
+    - Object.create() allows for prototypes / inheritance
+
+        let otherPerson = Object.create(null); // null is saying which prototype to base it off of
+        otherPerson.name = 'bt';
+        console.log(otherPerson);
+
+        let person = {
+            name: 'bt',
+            age: 34,
+        };
+
+        let person1 = Object.create(person); // null is saying which prototype to use
+        otherPerson.name = 'bt';
+        console.log(person1.age);   // 34 because the prototype passed in (person) has an age property
 
 + prototypes intro
+    - all objects in js already have a prototype -- Object.prototype (also an object)
+
+        let person = {
+            name: 'bt',
+            age: 34,
+        };
+        console.log(person.prototype); // undefined
+        console.log(person.__proto__); // [object Object] {...}  --> unsafe
+        console.log(person.anything()); // undefined --> this method doesn't exists
+        console.log(person.toString()); // "[object Object]" --> this method exists
+
+    - prototype has some built-in methods that we can use
+    - will always have access to prototype methods
+        let person = {
+            name: 'bt',
+            age: 34,
+        };
+
+        // sets a new method on the prototype that any object can access
+        Object.prototype.greet = function() {
+            console.log('hello there');
+        }
+        person.greet(); // 'hello there'
+
+    - prototype chain:
+        obj.greet() --> looks at obj methods,
+            no greet() --> looks at prototype,
+                no greet() --> looks at prototype of the prototype ... until it is found or not
 
 + prototypes in action
+    - can create multiple objects of a certain blueprint
+
+        let person = {
+            name: 'bt',
+            age: 34,
+        };
+
+        Object.prototype.greet = function() {
+            console.log('hello there');
+        }
+
+        let bt = Object.create(person);
+        console.log(bt.name); // bt
+        bt.greet(); // 'hello there'
+
+        //////////////////////////////////////
+        let person = {
+            name: 'bt',
+            age: 34,
+        };
+
+        Object.prototype.greet = function() {
+            console.log('hello there, i am ' + this.name);
+        }
+
+        let bt = Object.create(person);
+        let max = Object.create(person);
+        max.name = 'max';
+
+        bt.greet(); // 'hello there, i am bt'
+        max.greet(); // 'hello there, i am max'
+
+        //////////////////////////////////////
+        let person = {
+            name: 'bt',
+            age: 34,
+        };
+
+        Object.prototype.greet = function() {
+            console.log('hello there, i am ' + this.name);
+        }
+
+        let bt = Object.create(person);
+        let max = Object.create(person);
+
+        bt.greet(); // 'hello there, i am bt'
+        max.greet(); // 'hello there, i am bt' --> prototype name is still bt
 
 + prototypes summary
+    - see which prototype is associated with an object
+        let person = {
+            name: 'bt',
+            age: 34,
+        };
+
+        Object.prototype.greet = function() {
+            console.log('hello there, i am ' + this.name);
+        }
+
+        let bt = Object.create(person);
+        let max = Object.create(person);
+        // debugging only, never do this in production code
+        console.log(max.__proto__ == person); // true
+        console.log(max.__proto__.__proto__ == Object.prototype); // true
+
+    - safer way to see which object has which prototype
+        let person = {
+            name: 'bt',
+            age: 34,
+        };
+
+        Object.prototype.greet = function() {
+            console.log('hello there, i am ' + this.name);
+        }
+
+        let bt = Object.create(person);
+        let max = Object.create(person);
+        // safer check
+        console.log(Object.getPrototypeOf(bt) == person); // true
 
 + constructor functions
+    - normal function except name starts with capital letter
+    - construct objects using this function
+
+        function Person() {
+
+        }
+        let person = new Person();
+        person.name = 'bt';
+        console.log(person);
+        /*
+            [object Object] {
+                name: 'bt'
+            }
+        */
+        console.log(person.__proto__ == Object.prototype); // false
+        console.log(person.__proto__ == Person.prototype); // true
+
+    - js created a Person.prototype
+        Person.prototype.greet = function() {
+            console.log('hello');
+        };
+        person.greet(); // 'hello'
+
+    - this refers to our person
+        function Person() {
+            this.name = 'bt';
+        }
+        let person = new Person();
+        console.log(person.name); // "bt" --> name is set in the constructor
+        //////////////////////////
+        function Person() {
+            this.name = 'bt';
+        }
+        Person.prototype.name = 'homer'; // not overwriting it on the object level
+
+        let person = new Person();
+        console.log(person.name); // still "bt" --> name is set in the constructor
+
+    -
+        function Person() {
+            this.name = 'bt';
+            this.greet = function() {
+                console.log('hello, i am ' + this.name);
+            }
+        }
+        let person = new Person();
+        person.greet(); // 'hello, i am bt'
+
+        person.name = 'homer'
+        person.greet(); // 'hello, i am homer'
+
+        let cat = new Person(); // no name set
+        cat.greet(); // 'hello, i am bt' --> name is set in the constructor, which was not overwritten
+
+    - checks instance, then constructor, the prototype
+    - can check whether an object is an instance of another object via instanceOf
+        console.log(person instanceOf Person); // true
 
 + constructor functions & arguments
+    - can pass arguments to constructors
+        function Person(name,age) {
+            this.name = name;
+            this.age = age;
+        }
+        let person = new Person('bt', 34);
+        console.log(person);
+            // [object Object] {
+            //     age: 34,
+            //     name: 'bt'
+            // }
 
 + object creation and prototypes summary
+    - constructors are blueprints for your objects to create instances of those constructor functions
+    - prototypes are inheritance
+
+        let person = new Object();
+        person.name = 'bt';
+        person.age = 34;
+        console.log(person instanceOf Object); // true
+
+        // set prototype, if null than standalone
+        let person = Object.create(null);   // pick your prototype or set to null
+        person.name = 'bt';
+        person.age = 34;
+        console.log(person.toString()); // error - null prototype overwrites the Object.prototype which would give this object access to the toString() method
+        console.log(person instanceOf Object); // false - this object is standalone
+
+        //  build your own blueprint, own prototype but also Object.prototype
+        function Person(name,age) {
+            this.name = name;
+            this.age = age;
+        }
+        let person = new Person('bt', 34);
 
 + the "this" keyword and why it may behave strangely
+    - this always refers to the left part of the dot that executes something where this is included
+        function fn() {
+            console.log(this);
+        }
+        fn(); // logs the entire window object
+
+        let obj = {
+            obfn: fn
+        }
+        obj.obfn();
+        // [object Object] {
+        //     fn: function obfn() {
+        //         console.log(this);
+        //     }
+        // }
+
+    - this refers to obj in this case
+    - if we want to still refer to the global window instead of the object scope:
+        obj.obfn.bind(this)(); // rebind this to the global this
 
 + handling "this" with bind(), call(), & apply()
+    - allows this keyword to be used as you would guess
 
+    - bind(): object.bind(what_this_is_bound_to, other_function_args);
+        - can bind and call later because it isn't called instantly
+
+        function fn(message) {
+            console.log(message + this);
+        }
+        fn(); // logs the entire window object
+
+        let obj = {
+            obfn: fn
+        }
+
+        let person = {
+            name: 'max'
+        }
+        // last set of () runs this
+        obj.obfn.bind(person, 'hello')(); // "hello[object Object]"
+
+    - call(): object.call(what_this_is_bound_to, other_function_args);
+        - called instantly
+
+        obj.obfn.call(person, 'hello'); // instantly calls,  "hello[object Object]"
+
+    - apply(): object.apply(what_this_is_bound_to, [other_function_args]);
+        - called instantly
+        - pass in where it is bound and an array of other args
+
+        obj.obfn.call(person, ['hello']); // instantly calls,  "hello[object Object]"
+
++ creating properties with defineProperty()
+    - configuring properties
+    - Object.defineProperty() default is read only, must set writable:true to update
+
+        let account = {
+            cash: 12000,
+            withdraw: function(amount) {
+                this.cash -= amount;
+                console.log('withdrew ' + amount ', new balance: ' + this.cash);
+            }
+        }
+        account.withdraw(1000); // withdrew 10000, new balance: 11000
+
+        Object.defineProperty(account, 'deposit', {
+            value: function(amount) {
+                this.cash += amount;
+            }
+        });
+        account.deposit(3000);
+        account.withdraw(1000);
+
+        Object.defineProperty(account, 'name') {
+            value: 'ID000-1'
+        }
+        console.log(account.name); // 'ID000-1'
+        account.name = 'ID000-3';
+
+        console.log(account.name); // 'ID000-1' still? because property isn't writable
+
+        /////////////////
+        Object.defineProperty(account, 'name') {
+            value: 'ID000-1',
+            writeable: true
+        }
+        account.name = 'ID000-3';
+        console.log(account.name); // 'ID000-3'
+
+    - want to create a property with more detail, this is the way to go
+    - can set writeable and enumerable
+    - can create getters and setters
+        let account = {
+            cash: 12000,
+            _name: 'default',
+            withdraw: function(amount) {
+                this.cash -= amount;
+                console.log('withdrew ' + amount ', new balance: ' + this.cash);
+            }
+        }
+
+        Object.defineProperty(account, 'name') {
+            value: 'ID000-1',
+            get: function() {
+                return this._name;
+            },
+            set: function(name) {
+                this._name = name;
+            }
+        }
 + import built-in methods and properties
+    - delete property
+        let person = {
+            name: 'bt',
+            age: 34
+        }
+        // person.name = null; // this will null the value but the property still exists
+        delete person.name; // deletes the property and you'll get undefined
+
+    - see if a field exists using in. property must be a string passed in first. case sensitive.
+        let person = {
+            name: 'bt',
+            age: 34
+        }
+        console.log('name' in person); //true
+        console.log('Name' in person); //false
+
+    - iterate
+        let person = {
+            name: 'bt',
+            age: 34,
+            greet: function() {
+                console.log('hello');
+            }
+        }
+
+        for(let field in person) {
+            console.log(field); // name, age, greet --> properties
+            console.log(person[field]); // 'bt', 34 --> values
+        }
 
 + wrap up
-
 + more resources
+
 
 SECTION 6 -- errors and debugging
 + debugging with the browser developer tools
