@@ -40,4 +40,22 @@ Given two strings str1 and str2, return the largest string x such that x divides
  * @param {string} str2
  * @return {string}
  */
-const gcdOfStrings = function (str1, str2) {};
+const gcdOfStrings = function (str1, str2) {
+    if (str1 + str2 !== str2 + str1) return "";
+
+    let str1Len = str1.length;
+    let str2Len = str2.length;
+
+    while (str2Len) {
+        let tmp = str2Len;
+
+        str2Len = str1Len % str2Len;
+        str1Len = tmp;
+    }
+
+    return str1.substring(0, str1Len);
+};
+
+/*
+
+ */
