@@ -80,3 +80,27 @@ function error(n) {
 
     return msgs[n] ? `${msgs[n]}: e${n}` : 101;
 }
+
+/**
+ * Spotlight Sum
+ * Given a 10x10 grid of numbers 1-100, return the Spotlight Sum, given a number n. The spotlight sum can be defined as the total of the 8 numbers immediately surrounding the number n on the grid, including n in the total.
+ */
+const spotlightSum = (n) => n * 9;
+
+/**
+ * No Conditionals?
+ * Write a function that returns 0 if the input is 1, and returns 1 if the input is 0.
+ */
+const flip = (y) => 1 - y;
+
+/**
+ * Come Check Out This Crazy Function
+ * You are given two numbers, a and b. Write a function which uses an expression to return the expected output.
+ */
+const crazyfunction = (a, b) => (a ^= b);
+
+/**
+ * Find the Amount of Potatoes
+ * Create a function to return the amount of potatoes there are in a string.
+ */
+const potatoes = (str) => (str.match(/potato/g) || []).length;
