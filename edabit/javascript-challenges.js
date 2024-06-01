@@ -54,3 +54,53 @@ function numberSquares(n) {
 
     return n * n + numberSquares(n - 1);
 }
+
+/**
+ * Tile Teamwork Tactics
+ * In a board game, a piece may advance 1-6 tiles forward depending on the number rolled on a six-sided die. If you advance your piece onto the same tile as another player's piece, both of you earn a bonus.
+ * Can you reach your friend's tile number in the next roll? Create a function that takes your position a and your friend's position b and returns a boolean representation of whether it's possible to earn a bonus on any die roll.
+ */
+function possibleBonus(a, b) {
+    return b - a <= 6 && b - a > 0;
+}
+
+/**
+ * Error Messages
+ * Create a function that takes a number as an argument and returns the appropriate error message. You should do this without using the switch or if statements.
+ * For any other value, return 101 (you can use an if statement here).
+ */
+function error(n) {
+    const msgs = {
+        1: "Check the fan",
+        2: "Emergency stop",
+        3: "Pump Error",
+        4: "c",
+        5: "Temperature Sensor Error"
+    };
+
+    return msgs[n] ? `${msgs[n]}: e${n}` : 101;
+}
+
+/**
+ * Spotlight Sum
+ * Given a 10x10 grid of numbers 1-100, return the Spotlight Sum, given a number n. The spotlight sum can be defined as the total of the 8 numbers immediately surrounding the number n on the grid, including n in the total.
+ */
+const spotlightSum = (n) => n * 9;
+
+/**
+ * No Conditionals?
+ * Write a function that returns 0 if the input is 1, and returns 1 if the input is 0.
+ */
+const flip = (y) => 1 - y;
+
+/**
+ * Come Check Out This Crazy Function
+ * You are given two numbers, a and b. Write a function which uses an expression to return the expected output.
+ */
+const crazyfunction = (a, b) => (a ^= b);
+
+/**
+ * Find the Amount of Potatoes
+ * Create a function to return the amount of potatoes there are in a string.
+ */
+const potatoes = (str) => (str.match(/potato/g) || []).length;
