@@ -100,3 +100,35 @@ const canPlaceFlowers = function(flowerbed, n) {
     }
 
     return count >= n;
+
+/**
+ * 345. Reverse Vowels of a String
+ * Given a string s, reverse only all the vowels in the string and return it. 
+ * The vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in both lower and upper cases, more than once.
+ */
+
+/**
+ * @param {string} s
+ * @return {string}
+ */
+const reverseVowels = (s) => {
+    const vowel = s.match(/[aeiou]/gi);
+    return s.replace(/[aeiou]/gi, element => vowel.pop());
+};
+
+/**
+ * 151. Reverse Words in a String
+ * Given an input string s, reverse the order of the words. A word is defined as a sequence of non-space characters. The words in s will be separated by at least one space. 
+ * Return a string of the words in reverse order concatenated by a single space.
+ * Note that s may contain leading or trailing spaces or multiple spaces between two words. The returned string should only have a single space separating the words. Do not include any extra spaces.
+ */
+
+/**
+ * @param {string} s
+ * @return {string}
+ */
+const reverseWords = (s) => s.split(' ').filter(el => el.length > 0).reverse().join(' ');
+
+/**
+ * 
+ */
