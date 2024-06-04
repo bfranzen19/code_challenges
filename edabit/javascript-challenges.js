@@ -104,3 +104,62 @@ const crazyfunction = (a, b) => (a ^= b);
  * Create a function to return the amount of potatoes there are in a string.
  */
 const potatoes = (str) => (str.match(/potato/g) || []).length;
+
+/**
+ * Restaurant Voter
+ * 1. return the restaurant name that was voted for the most times
+ * 2. return the 2 restaurant names that were voted for the most
+ * 3. return the rank order of the restaurant that had the most votes (0th = 3pts, 1st = 2pts, 2nd = 1pt)
+ */
+
+const data = {
+    riot: ["Buff", "Snooze", "Hapa"],
+    alby: ["Snooze", "Hapa", "LePeep"],
+    homer: ["Tangerine", "Japanga", "Hapa"]
+};
+
+// build the votes object and conditionally return the necessary order
+const buildVotes = (sorted, ranked) => {
+    const votes = {};
+    const points = {
+        0: 3,
+        1: 2,
+        2: 1
+    };
+
+    for (const prop in data) {
+        data[prop].forEach((name, i) => {
+            if (!votes[name]) votes[name] = ranked ? points[i] : 1;
+            else votes[name] += ranked ? points[i] : 1;
+        });
+    }
+
+    if (sorted) return Object.entries(votes).sort((a, b) => b[1] - a[1]);
+
+    return votes;
+};
+
+// return restaurant name with the most votes
+const pickOne = () => {
+    return buildVotes(true, false)[0][0];
+};
+
+// return 2 restaurant names with the most and 2nd most votes
+const pickTwo = () => {
+    const votes = buildVotes(true, false);
+    return [votes[0][0], votes[1][0]];
+};
+
+// return the restaurant name with the highest points
+const rankOrder = () => {
+    return buildVotes(true, true)[0][0];
+};
+
+/* ----- tests ----- */
+const one = pickOne();
+const two = pickTwo();
+const ranked = rankOrder();
+
+console.log("pickOne: ", one === "Hapa", " - ", one);
+console.log("pickTwo: ", two.length === 2 && two[0] === "Hapa" && two[1] === "Snooze", " - ", two);
+console.log("rankOrder: ", ranked === "Snooze", " - ", ranked);
